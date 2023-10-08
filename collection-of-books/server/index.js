@@ -1,11 +1,17 @@
-const express = require("express")
-const app = express()
-const PORT = 5000
+const express = require("express");
+const mongoose = require("mongoose");
+require('dotenv').config();
+const app = express();
+const PORT = 5000;
 
-app.get('/', (req, res) => {
-    res.send("hello")
-})
+//DB接続
+try {
+    mongoose.connect(process.env.MONGODB_URL);
+    console.log("DBと接続中");
+} catch (error) {
+    console.log(error);
+}
 
 app.listen(PORT, () => {
-    console.log(`サーバー${PORT}を起動中`);
+    console.log(`サーバーPORT${PORT}を起動中`);
 })
